@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% load humanize %}
+
+{% block js %}
+<script>
+let previews=document.getElementsByClassName('preview');
+Array.from(previews).forEach((element)=>{
+    element.innerHTML=element.innerText;
+})
+</script>
+{% endblock %}
+
+{% block blogactive %}active{% endblock %}
+
+
+{% block body %}
+<div class="container">
+  <h3 class="mt-3" style="word-wrap: break-word; white-space: pre-line;">Search Results for <i>{{query|truncatechars:78}}</i></h3>
+  {% if allPosts|length < 1 %}
+  <p>No Search Results</p>
+  <p>Your search - <i><b style="word-wrap: break-word; white-space: pre-line;">{{ query|truncatechars:78 }}</b></i> - did not match any blog posts</p>
+  <p>Suggesttions :</p>
+  <ul><li>Try different keywords</li>
+  <li>Make sure that all words are spelled correctly.</li>
+  <li>Try more general keywords.</li>
+  <li>Try fewer keywords</li></ul>
+  {% endif %}
+  {% for post in allPosts %}
+    <div class="card my-3">
+      <div class="card-body">
+        <h6 class="card-title"><b><a style="text-decoration: none;">Published {{ post.timestamp|naturaltime }}</a> ({{post.views}})</b></h6>
+        <h2 class="card-title"><a style="text-decoration: none;" href="/blog/{{post.slug}}">{{ post.title }}</a></h2>
+        <p class="card-text"><div class="preview">{{ post.content|safe|truncatechars:250 }}</div></p>
+        <a href="/blog/{{post.slug}}" class="btn btn-primary">Continue Reading ➔</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

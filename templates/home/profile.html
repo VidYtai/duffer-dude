@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+  <div class="container mt-5">
+    <h2>Welcome, {{ user.username }}!</h2>
+  
+    <div class="mt-4">
+      <h4>Personal Information :</h4>
+      <p>Username: {{ user.username }}</p>
+      <p>First Name: {{ user.first_name }}</p>
+      <p>Last Name: {{ user.last_name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Profile Photo : You can change your profile photo from <a href="/pfp/">here</a></p><img src="{{ user.profile.image.url }}" alt="Profile Photo" width="200" height="200">
+    </div>
+    <div class="my-4 pass">
+      <h4>Edit Personal Details</h4>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Update Profile</button>
+      </form>
+    </div>
+  </div>
+<style>
+  .pass {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  .pass input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .pass input[type=email], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  #id_password {
+    display: none;
+  }
+  label[for="id_password"] {
+    display: none;
+  }
+  .pass ul li {
+    color: #ff3333;
+  }
+</style>
+{% endblock %}

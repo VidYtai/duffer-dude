@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'tinymce',
 ]
 
+ADMIN_INTERFACE_CONFIG = {
+    'ADMIN_TITLE': 'Your Custom Title',
+}
+
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
 

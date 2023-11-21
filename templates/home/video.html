@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Video{% endblock %}
+
+{% block videoactive %}active{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1 class="mt-3">Video</h1>
+  <div id="videos-container"></div>
+  <script>
+    // Replace 'YOUR_API_KEY' with your actual API key
+    const apiKey = 'AIzaSyCgSrTkSz9k7KJn3MlF6dhO8BPu0rgGjOU';
+    const channelId = 'UClk6MhjROzEENIhm-jO1N-A'; // Replace with the target YouTube channel ID
+
+    // Function to fetch videos from the YouTube Data API
+    async function fetchYouTubeVideos() {
+      const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=10`;
+
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        // Display videos on the page
+        const videosContainer = document.getElementById('videos-container');
+        data.items.forEach(item => {
+          const videoId = item.id.videoId;
+          const videoTitle = item.snippet.title;
+          const videoThumbnail = item.snippet.thumbnails.default.url;
+
+          const videoElement = document.createElement('div');
+          videoElement.innerHTML = `
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+            <h2>${videoTitle}</h2>
+          `;
+
+          videosContainer.appendChild(videoElement);
+        });
+      } catch (error) {
+        console.error('Error fetching YouTube videos:', error);
+      }
+    }
+
+    // Call the function to fetch and display videos
+    fetchYouTubeVideos();
+  </script>
+</div>
+{% endblock %}

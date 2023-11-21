@@ -42,6 +42,9 @@ def contact(request):
 
 def about(request):
     return render(request, 'home/about.html')
+    
+def video(request):
+    return render(request, 'home/video.html')
 
 
 def search(request):

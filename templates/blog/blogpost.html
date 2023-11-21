@@ -11,7 +11,7 @@
 {% load extras %}
 
 <div class="container my-3">
-  <h2 class="blog-post-title">{{ post.title }}</h2>
+  <h1 class="blog-post-title">{{ post.title }}</h1>
   <p class="blog-post-meta">Published {{post.timestamp|naturaltime}} (<span > {{post.views}} views</span>)</p>
   <p class="blog-post-content">{{ post.content|safe }}</p>
 </div>

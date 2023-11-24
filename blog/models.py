@@ -8,7 +8,6 @@ class Post(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     content = HTMLField()
-    views = models.IntegerField(default=0)
     slug = models.CharField(max_length=200, unique=True)
     timestamp = models.DateTimeField(blank=True)
 

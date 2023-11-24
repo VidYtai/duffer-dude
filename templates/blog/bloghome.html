@@ -21,7 +21,7 @@ Array.from(previews).forEach((element)=>{
   {% for post in allPosts %}
   <div class="card my-3">
     <div class="card-body">
-      <h6 class="card-title"><b><a style="text-decoration: none;">Published {{ post.timestamp|naturaltime }}</a> ({{post.views}})</b></h6>
+      <h6 class="card-title"><b><a style="text-decoration: none;">Published {{ post.timestamp|naturaltime }}</a></b></h6>
       <h2 class="card-title"><a style="text-decoration: none;" href="/blog/{{post.slug}}">{{ post.title }}</a></h2>
       <p class="card-text"><div class="preview">{{ post.content|safe|truncatechars:250 }}</div></p>
       <a href="/blog/{{post.slug}}" class="btn btn-primary">Continue Reading ➔</a>
